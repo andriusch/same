@@ -1,4 +1,15 @@
+# frozen_string_literal: true
+
 module Same
+  # Manager is a database mapping which entities contain which components and thus allows finding entities by component
+  # class.
+  # :call-seq:
+  #     manager = Same::Manager.new
+  #     manager.create_entity(:player) do
+  #       add PlayerControls
+  #     end
+  #
+  #     manager.entities_with(PlayerControls) -> [player]
   class Manager
     def initialize
       @store = Hash.new { |h, k| h[k] = [] }

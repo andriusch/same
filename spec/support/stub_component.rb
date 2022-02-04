@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module StubComponent
   def stub_component(name, &block)
     Class.new.tap do |klass|

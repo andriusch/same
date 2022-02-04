@@ -2,9 +2,10 @@ module Same
   class Entity
     attr_reader :manager, :identifier
 
-    def initialize(manager, identifier)
+    def initialize(manager, identifier, &block)
       @manager = manager
       @identifier = identifier
+      instance_eval(&block) if block
     end
 
     def add(type, ...)

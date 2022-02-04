@@ -9,6 +9,12 @@ describe Same::Entity do
 
   describe '#initialize' do
     it { is_expected.to have_attributes(manager: manager, identifier: :my_entity) }
+
+    context 'with block' do
+      subject(:entity) { described_class.new(manager, :my_entity) { @identifier = :overwritten } }
+
+      it { is_expected.to have_attributes(identifier: :overwritten) }
+    end
   end
 
   describe '#add' do

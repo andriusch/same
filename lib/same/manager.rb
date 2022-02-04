@@ -4,8 +4,8 @@ module Same
       @store = Hash.new { |h, k| h[k] = [] }
     end
 
-    def create_entity(identifier)
-      Entity.new(self, identifier)
+    def create_entity(...)
+      Entity.new(self, ...)
     end
 
     def entities_with(type)

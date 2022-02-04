@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require_relative "component/composable"
+require_relative "component/intersection"
+
 module Same
   # This module should be included in every component in your application.
   #
@@ -33,6 +36,15 @@ module Same
       @identifier = name.underscore
       singleton_class.attr_reader :identifier
       Same::Entity.attr_reader @identifier
+    end
+
+    # Class methods for {Component}.
+    module ClassMethods
+      include Composable
+
+      def entities(store)
+        store[self]
+      end
     end
   end
 end

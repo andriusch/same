@@ -7,9 +7,14 @@ module Same
   #     manager = Same::Manager.new
   #     manager.create_entity(:player) do
   #       add PlayerControls
+  #       add Position, 12, 13
+  #     end
+  #     manager.create_entity(:enemy) do
+  #       add Position, 60, 70
   #     end
   #
-  #     manager.entities_with(PlayerControls) -> [player]
+  #     manager.entities_with(Position) -> [player, enemy]
+  #     manager.entities_with(PlayerControls & Position) -> [player]
   class Manager
     def initialize
       @store = Hash.new { |h, k| h[k] = [] }
@@ -19,8 +24,8 @@ module Same
       Entity.new(self, ...)
     end
 
-    def entities_with(type)
-      @store[type]
+    def entities_with(selector)
+      selector.entities(@store)
     end
 
     # @private

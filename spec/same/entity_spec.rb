@@ -27,10 +27,17 @@ describe Same::Entity do
           @y = y
         end
       end
-      entity.add(Position, 15, 27)
     end
 
-    it { expect(entity.position).to be_a(Position).and have_attributes(x: 15, y: 27) }
+    it 'initializes and adds component' do
+      entity.add(Position, 15, 27)
+      expect(entity.position).to be_a(Position).and have_attributes(x: 15, y: 27)
+    end
+
+    it 'adds component instance' do
+      entity.add(Position.new(15, 27))
+      expect(entity.position).to be_a(Position).and have_attributes(x: 15, y: 27)
+    end
   end
 
   describe '#remove' do

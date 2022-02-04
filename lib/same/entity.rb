@@ -8,8 +8,8 @@ module Same
       instance_eval(&block) if block
     end
 
-    def add(type, ...)
-      component = type.new(...)
+    def add(type_or_component, ...)
+      type, component = type_and_component(type_or_component, ...)
       instance_variable_set("@#{type.identifier}", component)
       @manager._register_component(self, type)
       self
@@ -21,6 +21,16 @@ module Same
 
     def destroy
       @manager._unregister_entity(self)
+    end
+
+    private
+
+    def type_and_component(type_or_component, ...)
+      if type_or_component.is_a?(Class)
+        [type_or_component, type_or_component.new(...)]
+      else
+        [type_or_component.class, type_or_component]
+      end
     end
   end
 end

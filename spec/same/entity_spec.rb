@@ -40,6 +40,15 @@ describe Same::Entity do
       entity.add(Position.new(15, 27))
       expect(entity.position).to be_a(Position) & have_attributes(x: 15, y: 27)
     end
+
+    context "when using namespaced component" do
+      before { stub_component("UI::Clickable") }
+
+      it "adds component" do
+        entity.add(UI::Clickable)
+        expect(entity.ui_clickable).to be_a(UI::Clickable)
+      end
+    end
   end
 
   describe "#remove" do

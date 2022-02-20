@@ -33,7 +33,7 @@ module Same
     extend ActiveSupport::Concern
 
     included do
-      @identifier = name.parameterize(separator: "_")
+      @identifier = name.underscore.tr("/", "_")
       singleton_class.attr_reader :identifier
       Same::Entity.attr_reader @identifier
     end

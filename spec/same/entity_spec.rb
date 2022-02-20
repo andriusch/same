@@ -41,13 +41,16 @@ describe Same::Entity do
       expect(entity.position).to be_a(Position) & have_attributes(x: 15, y: 27)
     end
 
-    context "when using namespaced component" do
-      before { stub_component("UI::Clickable") }
+    it "adds component with multiple words" do
+      stub_component("HasSize")
+      entity.add(HasSize)
+      expect(entity.has_size).to be_a(HasSize)
+    end
 
-      it "adds component" do
-        entity.add(UI::Clickable)
-        expect(entity.ui_clickable).to be_a(UI::Clickable)
-      end
+    it "adds namespaced component" do
+      stub_component("UI::Clickable")
+      entity.add(UI::Clickable)
+      expect(entity.ui_clickable).to be_a(UI::Clickable)
     end
   end
 
